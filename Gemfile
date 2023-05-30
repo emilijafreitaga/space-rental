@@ -49,6 +49,7 @@ gem "sassc-rails"
 # gem "image_processing", "~> 1.2"
 
 gem "devise"
+gem "dotenv-rails"
 
 gem "bootstrap", "~> 5.2"
 gem "autoprefixer-rails"

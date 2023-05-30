@@ -3,9 +3,10 @@ class SpacesController < ApplicationController
   def index
     @spaces = Space.all
   end
-  
+  # Added Booking.New to be able to book a space (using simple form in the space show page)
   def show
     @space = Space.find(params[:id])
+    @booking = Booking.new
   end
 
   def new

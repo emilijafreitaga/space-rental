@@ -1,6 +1,3 @@
-hello <% @user.email %>
-
-
 All Spaces
 <div class="container col-4">
   <% @spaces.each do |space| %>
@@ -11,14 +8,38 @@ All Spaces
   <%= link_to 'Delete space',  space_path(space), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
   <% end %>
 </div>
+<div>
+Bookings of my Spaces
+<% current_user.bookings_as_owner.each do |booking| %>
+ <p> <%= booking.space.place_name %> </p>
+ <% if booking.confirmed == true %>
+    Booking confirmed? <i class="fa-solid fa-check"></i>
+  <% else %>
+    Booking confirmed? <i class="fa-solid fa-xmark"></i>
+  <% end %>
 
+<% end %>
+</div>
 All Bookings
 <div class="container col-4">
-  <% @bookings.each do |booking| %>%
-  <%= link_to booking.space.place_name, space_booking_path(booking) %>
-  <%= link_to 'Update',  edit_space_booking_path(booking) %>
+  <div>
+    <% @bookings.each do |booking| %>
+    <p> Place name: <%= booking.space.place_name %> </p>
+    <p> Address: <%= booking.space.address %> </p>
+    <p> Booked for: <%= booking.covers %> persons </p>
+    <p> Date: <%= booking.date %> </p>
+    <% if booking.confirmed == true %>
+    <p> Booking confirmed </p>
+    <% else %>
+    <p> Pending confirmation </p>
+    <% end %>
+  <%= link_to 'Update',  edit_space_booking_path(id: booking.id, space_id: booking.space.id) %>
   <%= link_to 'Delete',  booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  </div>
   <% end %>
+
 </div>
 
 <%= link_to 'Add a new space', new_space_path %>
+
+<%= link_to '< Back', spaces_path %>

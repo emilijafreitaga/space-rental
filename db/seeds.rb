@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
 puts "Cleaning database..."
 
 User.destroy_all
@@ -42,7 +34,7 @@ Space.create!(
   place_name: 'STK Steakhouse London',
   address: 'STK London, ME London Hotel, 336-337 The Strand, London, WC2R 1HA',
   category: 'Party',
-  description: "Unwind and feel the energy at STK, London's top USDA prime steak house, brought to you from New York operators The ONE Group. With a sophisticated, trendy vibe, STK London is more than just steak, it's an entire experience. For group bookings of 10+ please contact our reservation team on 020 395 3450 or london_reservations@togrp.com.",
+  description: "Unwind and feel the energy at STK, London's top USDA prime steak house, brought to you from New York operators The ONE Group. With a sophisticated, trendy vibe, STK London is more than just steak, it’s an entire experience. For group bookings of 10+ please contact our reservation team on 020 395 3450 or london_reservations@togrp.com.",
   max_capacity: 70,
   price_per_booking: 4000,
   user: User.first
@@ -79,4 +71,3 @@ Space.create!(
 )
 
 puts "Finished!"
-

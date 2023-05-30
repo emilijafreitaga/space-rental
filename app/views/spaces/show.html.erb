@@ -1,0 +1,12 @@
+<div class="container">
+  <h1><%= @space.place_name %></h1>
+  <ul>
+    <li><p>Address: <%= @space.address %></li></p>
+    <li><p>Category: <%= @space.category %></li></p>
+    <li><p>Description: <%= @space.description %></li></p>
+    <li><p>Maximum Capacity: <%= @space.max_capacity %></li></p>
+    <li><p>Price per booking: <%= @space.price_per_booking %></li></p>
+  </ul>
+  <%= link_to "Back to Spaces", spaces_path, class: "btn btn-primary" %>
+  <%= link_to "Edit Space", edit_space_path, class: "btn btn-success" %>
+</div>

@@ -3,7 +3,7 @@ class SpacesController < ApplicationController
   def index
     @spaces = Space.all
   end
-  
+
   def show
     @space = Space.find(params[:id])
   end
@@ -38,6 +38,6 @@ class SpacesController < ApplicationController
   private
 
   def space_params
-    params.require(:space).permit(:place_name, :address, :category, :description, :max_capacity, :price_per_booking)
+    params.require(:space).permit(:place_name, :address, :category, :description, :max_capacity, :price_per_booking, photos: [])
   end
 end

@@ -6,6 +6,7 @@
     <%= f.input :category, collection: Space::CATEGORY %>
     <%= f.input :description %>
     <%= f.input :max_capacity %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
     <%= f.input :price_per_booking %>
     <%= f.submit "Add a Space", class: "btn btn-success" %>
   <% end %>

@@ -8,7 +8,6 @@ class BookingsController < ApplicationController
     @space = Space.find(params[:space_id])
   end
 
-
   def create
     @booking = Booking.new(booking_params)
     @space = Space.find(params[:space_id])

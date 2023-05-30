@@ -1,0 +1,24 @@
+hello <% @user.email %>
+
+
+All Spaces
+<div class="container col-4">
+  <% @spaces.each do |space| %>
+  <%= link_to space.place_name, space_path(space) %>
+  <%= space.address %>
+  <%= space.max_capacity %>
+  <%= link_to 'Update space',  edit_space_path(space) %>
+  <%= link_to 'Delete space',  space_path(space), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <% end %>
+</div>
+
+All Bookings
+<div class="container col-4">
+  <% @bookings.each do |booking| %>%
+  <%= link_to booking.space.place_name, space_booking_path(booking) %>
+  <%= link_to 'Update',  edit_space_booking_path(booking) %>
+  <%= link_to 'Delete',  booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <% end %>
+</div>
+
+<%= link_to 'Add a new space', new_space_path %>

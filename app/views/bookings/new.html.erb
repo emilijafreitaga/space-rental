@@ -1,0 +1,5 @@
+<%= simple_form_for [@space, @booking] do |f| %>
+  <%= f.input :date %>
+  <%= f.input :covers %>
+  <%= f.submit "Add a booking", class: "btn btn-success" %>
+<% end %>

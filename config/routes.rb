@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get "/dashboard", to: "users#dashboard"
+  get "/home", to: "pages#home"
   resources :spaces do
     resources :bookings, only: [:show, :create, :edit, :update, :update_confirm]
   end

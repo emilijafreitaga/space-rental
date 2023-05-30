@@ -1,5 +1,5 @@
 class SpacesController < ApplicationController
-  # skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!
   def index
     @spaces = Space.all
   end
@@ -14,8 +14,9 @@ class SpacesController < ApplicationController
 
   def create
     @space = Space.new(space_params)
+    @space.user = current_user
     @space.save
-    redirect_to spaces.path
+    redirect_to spaces_path
   end
 
   def edit
@@ -23,12 +24,15 @@ class SpacesController < ApplicationController
   end
 
   def update
+    @space = Space.find(params[:id])
+    @space.update(space_params)
+    redirect_to space_path(@space)
   end
 
   def destroy
     @space = Space.find(params[:id])
     @space.destroy
-    redirect_to spaces.path
+    redirect_to spaces_path
   end
 
   private

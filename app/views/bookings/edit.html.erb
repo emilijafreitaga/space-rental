@@ -1,1 +1,7 @@
-hello from edit bookings
+Please edit your booking details
+
+<%= simple_form_for [@space, @booking] do |f| %>
+  <%= f.input :date %>
+  <%= f.input :covers %>
+  <%= f.submit "Edit a booking", class: "btn btn-success" %>
+<% end %>

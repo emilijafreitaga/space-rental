@@ -1,12 +1,29 @@
 <div class="container">
-  <h1>All Spaces</h1>
-  <ul class="list-group">
-  <% @spaces.each do |space| %>
-    <li class="list-group-item">
-    <%= link_to space.place_name, space_path(space) %>
-    <p>Category: <%= space.category %></p>
-    <p>Maximum capacity: <%= space.max_capacity %></p>
-    <p>Price per booking: <%= space.price_per_booking %></p>
-  <% end %>
-  <%= link_to "Add a Space", new_space_path, class: "btn btn-primary" %>
+  <div class="cards">
+      <% @spaces.each do |space| %>
+        <div class="card" style="width: 18rem;">
+          <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% space.photos.each do |photo| %>
+                <div class="carousel-item active">
+                  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to space.place_name, space_path(space) %></h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><p>Category: <%= space.category %></p></li>
+            <li class="list-group-item"><p>Maximum capacity: <%= space.max_capacity %></p></li>
+            <li class="list-group-item"><p>Price per booking: <%= space.price_per_booking %></p></li>
+          </ul>
+        </div>
+      <% end %>
+  </div>
 </div>
+
+
+
+

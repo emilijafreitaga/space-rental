@@ -6,6 +6,7 @@ class SpacesController < ApplicationController
 
   def show
     @space = Space.find(params[:id])
+    @booking = Booking.new
   end
 
   def new
@@ -38,6 +39,6 @@ class SpacesController < ApplicationController
   private
 
   def space_params
-    params.require(:space).permit(:place_name, :address, :category, :description, :max_capacity, :price_per_booking)
+    params.require(:space).permit(:place_name, :address, :category, :description, :max_capacity, :price_per_booking, photos: [])
   end
 end

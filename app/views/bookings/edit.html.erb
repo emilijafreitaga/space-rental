@@ -1,7 +1,8 @@
-Please edit your booking details
-
-<%= simple_form_for [@space, @booking] do |f| %>
+<div class="container">
+<h1>Edit booking</h1>
+  <%= simple_form_for [@space, @booking] do |f| %>
   <%= f.input :date %>
   <%= f.input :covers %>
-  <%= f.submit "Edit a booking", class: "btn btn-success" %>
-<% end %>
+  <%= f.submit "Edit a booking", class: "btn btn-primary" %>
+  <% end %>
+</div>

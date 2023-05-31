@@ -1,5 +1,6 @@
 puts "Cleaning database..."
 
+Space.destroy_all
 User.destroy_all
 
 puts "Creating users..."

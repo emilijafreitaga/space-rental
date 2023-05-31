@@ -1,23 +1,65 @@
 <div class="container">
   <h1><%= @space.place_name %></h1>
   <p>Category: <%= @space.category %></li>
-  <ul>
-    <li><p>Address: <%= @space.address %></li></p>
-    <li><p>Description: <%= @space.description %></li></p>
-    <li><p>Maximum Capacity: <%= @space.max_capacity %></li></p>
-    <li><p>Price per booking: <%= @space.price_per_booking %></li></p>
-  </ul>
-  <%= link_to "Back to Spaces", spaces_path, class: "btn btn-primary" %>
+  <br>
 
-<% if @space.user == current_user %>
-  <%= link_to "Edit Space", edit_space_path(@space), class: "btn btn-success" %>
-<% end %>
+  <%# add carosel banner %>
+  <% if @space.photos.attached? %>
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% @space.photos.each_with_index do |photo, index| %>
+          <% if index == 0 %>
+            <div class="carousel-item active">
+          <% else %>
+            <div class="carousel-item">
+          <% end %>
+            <%= cl_image_tag photo.key, class: "d-block carousel-img", crop: :fill %>
+          </div>
+        <% end %>
+      </div>
 
-</div>
-<% if @space.user != current_user %>
-  <%= simple_form_for [@space, @booking] do |f| %>
-    <%= f.input :date %>
-    <%= f.input :covers %>
-    <%= f.submit "Add a booking", class: "btn btn-success" %>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  <% else %>
+    <img src="https://www.askideas.com/media/12/Add-Me-Please-Kitten-Face-Picture.jpg" alt="">
   <% end %>
-<% end %>
+
+  <div class="d-flex">
+    <div class="p-3 flex-fill w-50">
+      <ul class="ps-0 space-details">
+        <li><p>Address: <%= @space.address %></li></p>
+        <li><p>Description: <%= @space.description %></li></p>
+        <li><p>Maximum Capacity: <%= @space.max_capacity %> persons</li></p>
+        <li><p>Price per booking: £<%= @space.price_per_booking %></li></p>
+      </ul>
+      <br>
+      <%= link_to "Back to Spaces", spaces_path, class: "btn btn-primary" %>
+    </div>
+    <br>
+    <div class="p-3 flex-fill">
+      <% if @space.user != current_user %>
+        <%= simple_form_for [@space, @booking] do |f| %>
+          <%= f.input :date %>
+          <%= f.input :covers %>
+          <div class="justify-content-between">
+            Grand Total: £ <%= @space.price_per_booking %>
+            <br>
+            <br>
+            <%= f.submit "Reserve", class: "btn btn-success" %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="p-3 flex-fill d-flex justify-content-end">
+          <%= link_to "Edit Space", edit_space_path(@space), class: "btn btn-success p-3 flex-fill" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

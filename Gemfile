@@ -51,6 +51,7 @@ gem "sassc-rails"
 gem "devise"
 gem "cloudinary"
 
+gem "ruby-vips"
 gem "bootstrap", "~> 5.2"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"

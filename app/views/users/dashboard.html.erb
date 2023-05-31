@@ -1,45 +1,85 @@
-All Spaces
-<div class="container col-4">
-  <% @spaces.each do |space| %>
-  <%= link_to space.place_name, space_path(space) %>
-  <%= space.address %>
-  <%= space.max_capacity %>
-  <%= link_to 'Update space',  edit_space_path(space) %>
-  <%= link_to 'Delete space',  space_path(space), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-  <% end %>
-</div>
-<div>
-Bookings of my Spaces
-<% current_user.bookings_as_owner.each do |booking| %>
- <p> <%= booking.space.place_name %> </p>
- <% if booking.confirmed == true %>
-    Booking confirmed? <i class="fa-solid fa-check"></i>
-  <% else %>
-    Booking confirmed? <i class="fa-solid fa-xmark"></i>
-  <% end %>
+<div class="container d-flex justify-content-between">
 
-<% end %>
-</div>
-All Bookings
-<div class="container col-4">
-  <div>
-    <% @bookings.each do |booking| %>
-    <p> Place name: <%= booking.space.place_name %> </p>
-    <p> Address: <%= booking.space.address %> </p>
-    <p> Booked for: <%= booking.covers %> persons </p>
-    <p> Date: <%= booking.date %> </p>
-    <% if booking.confirmed == true %>
-    <p> Booking confirmed </p>
-    <% else %>
-    <p> Pending confirmation </p>
-    <% end %>
-  <%= link_to 'Update',  edit_space_booking_path(id: booking.id, space_id: booking.space.id) %>
-  <%= link_to 'Delete',  booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+
+  <div class="flex-column me-4 w-50">
+    <h1>Host</h1>
+    <div class="card-trip">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="m-3">My Spaces</h2>
+        <%= link_to 'Add a new space', new_space_path, class: "btn btn-primary m-3" %>
+      </div>
+      <div class="cards flex-column">
+        <% @spaces.each do |space| %>
+          <div class="card" style="width: 18rem;">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <% space.photos.each do |photo| %>
+                  <div class="carousel-item active">
+                    <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to space.place_name, space_path(space), class: "text-decoration-none text-black" %></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><p>Category: <%= space.category %></p></li>
+              <li class="list-group-item"><p>Maximum capacity: <%= space.max_capacity %> persons</p></li>
+              <li class="list-group-item"><p>Price per booking: £<%= space.price_per_booking %></p></li>
+            </ul>
+              <%= link_to 'Update space', edit_space_path(space), class: "btn btn-success" %>
+              <%= link_to 'Delete space', space_path(space), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card mt-5">
+      <h2 class="m-3">Spaces Requests</h2>
+      <div class="card-body">
+        <% current_user.bookings_as_owner.each do |booking| %>
+          <h5 class="card-title"><%= booking.space.place_name %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Booking</h6>
+          <p class="card-text">Date: <%= booking.date %></p>
+          <p class="card-text">Amount of covers: <%= booking.covers %></p>
+          <% if booking.confirmed == true %>
+            <p class="card-text">Confirm your booking <i class="fa-solid fa-check"></i></p>
+          <% else %>
+            <p class="card-text">Confirm your booking <i class="fa-solid fa-xmark"></i></p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <% end %>
+
+
+  <div class="flex-column ms-4 w-50">
+    <h1>Guest</h1>
+    <div class="card">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="m-3">My Bookings</h2>
+        <%= link_to 'Choose your space', spaces_path, class: "btn btn-primary m-3" %>
+      </div>
+      <div class="card">
+          <% @bookings.each do |booking| %>
+            <div class="card-body">
+              <h5 class="card-title"> Place name: <%= booking.space.place_name %></h5>
+              <% if booking.confirmed == true %>
+                <h6 class="card-subtitle mb-2 text-muted">Booking confirmed</h6>
+              <% else %>
+                <h6 class="card-subtitle mb-2 text-muted">Pending confirmation</h6>
+              <% end %>
+              <p class="card-text">Address: <%= booking.space.address %></p>
+              <p class="card-text">Booked for: <%= booking.covers %> persons</p>
+              <p class="card-text">Date: <%= booking.date %></p>
+              <%= link_to 'Update', edit_space_booking_path(id: booking.id, space_id: booking.space.id), class: "card-link btn btn-success" %>
+              <%= link_to 'Delete', booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "card-link btn btn-danger" %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+
 
 </div>
-
-<%= link_to 'Add a new space', new_space_path %>
-
-<%= link_to '< Back', spaces_path %>

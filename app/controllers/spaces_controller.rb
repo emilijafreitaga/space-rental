@@ -3,7 +3,7 @@ class SpacesController < ApplicationController
   def index
     @spaces = Space.all
   end
-  # Added Booking.New to be able to book a space (using simple form in the space show page)
+
   def show
     @space = Space.find(params[:id])
     @booking = Booking.new
@@ -39,6 +39,6 @@ class SpacesController < ApplicationController
   private
 
   def space_params
-    params.require(:space).permit(:place_name, :address, :category, :description, :max_capacity, :price_per_booking)
+    params.require(:space).permit(:place_name, :address, :category, :description, :max_capacity, :price_per_booking, photos: [])
   end
 end

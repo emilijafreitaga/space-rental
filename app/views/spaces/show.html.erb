@@ -8,7 +8,11 @@
     <li><p>Price per booking: <%= @space.price_per_booking %></li></p>
   </ul>
   <%= link_to "Back to Spaces", spaces_path, class: "btn btn-primary" %>
+
+<% if @space.user == current_user %>
   <%= link_to "Edit Space", edit_space_path(@space), class: "btn btn-success" %>
+<% end %>
+
 </div>
 <% if @space.user != current_user %>
   <%= simple_form_for [@space, @booking] do |f| %>

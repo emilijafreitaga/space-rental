@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get "/home", to: "pages#home"
   resources :spaces do
     resources :bookings, only: [:show, :create, :edit, :update, :update_confirm]
+      resources :reviews, only: [:new, :create]
   end
   resources :bookings, only: [:destroy]
+  resources :reviews, only: [:destroy]
 end
 # test

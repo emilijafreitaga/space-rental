@@ -1,25 +1,12 @@
-<div class="container mt-5">
-  <div class="cards">
-      <% @spaces.each do |space| %>
-        <div class="card" style="width: 18rem;">
-          <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <% space.photos.each do |photo| %>
-                <div class="carousel-item active">
-                  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-                </div>
-              <% end %>
-            </div>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to space.place_name, space_path(space), class: "text-decoration-none text-black"%></h5>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><p>Category: <%= space.category %></p></li>
-            <li class="list-group-item"><p>Maximum capacity: <%= space.max_capacity %> persons</p></li>
-            <li class="list-group-item"><p>Price per booking: £<%= space.price_per_booking %></p></li>
-          </ul>
-        </div>
-      <% end %>
-  </div>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Map</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">All Spaces</button>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"><%= render partial: 'spaces/spaces_map' %></div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><%= render partial: 'spaces/spaces_cards' %></div>
 </div>

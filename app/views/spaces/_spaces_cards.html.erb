@@ -1,25 +1,30 @@
-<div class="container mt-5">
+<div class="container mt-7">
   <div class="cards">
-      <% @spaces.each do |space| %>
-        <div class="card" style="width: 18rem;">
-          <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <% space.photos.each do |photo| %>
+    <% @spaces.each do |space| %>
+      <div class="card-trip" style="width: 18rem;">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <% space.photos.each_with_index do |photo, index| %>
+              <% if index == 0 %>
                 <div class="carousel-item active">
-                  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-                </div>
+              <% else %>
+                <div class="carousel-item">
               <% end %>
-            </div>
+                <%= cl_image_tag photo.key,  height: 300, width: 400, crop: :fill %>
+                </div>
+            <% end %>
           </div>
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to space.place_name, space_path(space), class: "text-decoration-none text-black"%></h5>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><p>Category: <%= space.category %></p></li>
-            <li class="list-group-item"><p>Maximum capacity: <%= space.max_capacity %> persons</p></li>
-            <li class="list-group-item"><p>Price per booking: £<%= space.price_per_booking %></p></li>
-          </ul>
         </div>
-      <% end %>
+        <div class="card-trip-infos">
+          <div>
+            <h2><%= link_to space.place_name, space_path(space), class: "text-decoration-none text-black"%></h2>
+            <p>Category: <%= space.category %> </p>
+            <p>Maximum capacity: <%= space.max_capacity %> persons</p>
+          </div>
+          <h2 class="card-trip-pricing">£<%= space.price_per_booking %></h2>
+          <h2 class="card-trip-user">⭐️4.9 </h2>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

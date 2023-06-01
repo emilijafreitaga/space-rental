@@ -18,6 +18,7 @@
             <% else %>
               <h6 class="card-subtitle mb-2 text-muted">Pending confirmation</h6>
             <% end %>
+            <br>
             <div>
               <%= link_to 'Update', edit_space_booking_path(id: booking.id, space_id: booking.space.id), class: "card-link btn btn-success" %>
               <%= link_to 'Delete', booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "card-link btn btn-danger" %>

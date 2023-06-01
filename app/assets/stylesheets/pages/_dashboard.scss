@@ -1,0 +1,21 @@
+.nav-pills .nav-item {
+  --mdb-nav-pills--item: border-radius: 0.25rem;
+  --mdb-nav-pills--item: font-size: 12px;
+  --mdb-nav-pills--item: padding-top: 17px;
+  --mdb-nav-pills--item: padding-bottom: 16px;
+  --mdb-nav-pills--item: padding-x: 29px;
+  --mdb-nav-pills--item: line-height: 1;
+  --mdb-nav-pills--item: hover-bg: #f7f7f7;
+  --mdb-nav-pills--item: font-weight: 500;
+  --mdb-nav-pills--item: color: rgba(0,0,0,0.55);
+  --mdb-nav-pills-margin: 0.5rem;
+  border-radius: var(--mdb-nav-pills--item border-radius);
+  font-size: var(--mdb-nav-pills--item font-size);
+  text-transform: uppercase;
+  padding: var(--mdb-nav-pills--item padding-top) var(--mdb-nav-pills--item padding-x) var(--mdb-nav-pills--item padding-bottom) var(--mdb-nav-pills--item padding-x);
+  line-height: var(--mdb-nav-pills--item line-height);
+  background-color: var(--mdb-nav-pills--item hover-bg);
+  font-weight: var(--mdb-nav-pills--item font-weight);
+  color: var(--mdb-nav-pills--item color);
+  margin: var(--mdb-nav-pills-margin);
+}

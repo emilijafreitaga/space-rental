@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="d-flex justify-content-between align-items-center">
+    <h2 class="m-3">My Bookings</h2>
+    <%= link_to 'Choose your space', spaces_path, class: "btn btn-primary m-3" %>
+  </div>
+  <div class="card">
+      <% @bookings.each do |booking| %>
+        <div class="card-body">
+          <h5 class="card-title"> Place name: <%= booking.space.place_name %></h5>
+          <% if booking.confirmed == true %>
+            <h6 class="card-subtitle mb-2 text-muted">Booking confirmed</h6>
+          <% else %>
+            <h6 class="card-subtitle mb-2 text-muted">Pending confirmation</h6>
+          <% end %>
+          <p class="card-text">Address: <%= booking.space.address %></p>
+          <p class="card-text">Booked for: <%= booking.covers %> persons</p>
+          <p class="card-text">Date: <%= booking.date %></p>
+          <%= link_to 'Update', edit_space_booking_path(id: booking.id, space_id: booking.space.id), class: "card-link btn btn-success" %>
+          <%= link_to 'Delete', booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "card-link btn btn-danger" %>
+        </div>
+      <% end %>
+  </div>
+</div>

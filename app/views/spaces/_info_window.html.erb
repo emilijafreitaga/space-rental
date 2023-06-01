@@ -1,0 +1,8 @@
+<h4><%= space.place_name %></h4>
+<p>Category: <%= space.category %></p>
+<p>Address: <%= space.address %></p>
+<p>Maximum capacity: <%= space.max_capacity %></p>
+<p>Price per booking: <%= space.price_per_booking %></p>
+<% if space.user != current_user %>
+  <h4><%= link_to "Book Now", space_path(space), class: "btn btn-success" %></h4>
+<% end %>

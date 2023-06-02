@@ -32,7 +32,7 @@
   <% end %>
 
   <div class="d-flex">
-    <div class="p-3 flex-fill w-50">
+    <div class="col-5 p-3 flex-fill w-50">
       <ul class="ps-0 space-details">
         <li><p>Address: <%= @space.address %></li></p>
         <li><p>Description: <%= @space.description %></li></p>
@@ -43,7 +43,7 @@
       <%= link_to "Back to Spaces", spaces_path, class: "btn btn-primary" %>
     </div>
     <br>
-    <div class="p-3 flex-fill">
+    <div class="col-5 p-3 flex-fill w-50">
       <% if @space.user != current_user %>
         <%= simple_form_for [@space, @booking] do |f| %>
           <%= f.input :date %>
@@ -52,7 +52,7 @@
             Grand Total: £ <%= @space.price_per_booking %>
             <br>
             <br>
-            <%= f.submit "Reserve", class: "btn btn-success" %>
+            <%= f.submit "Book Now", class: "btn btn-success" %>
           </div>
         <% end %>
       <% else %>
@@ -62,27 +62,32 @@
       <% end %>
     </div>
   </div>
-</div>
 
-You've booked the space before, why don't you leave a review?
-<% if @booking1 %>
-  <%= simple_form_for [@booking1, @review] do |f| %>
-    <%= f.input :rating, placeholder: "Rate from 0 to 5" %>
-    <%= f.input :content %>
-    <%= f.submit "Add a review", class: "btn btn-success" %>
-  <% end %>
-<% end %>
-<br>
-<h1> All reviews </h1>
-<br>
 
-  <% @space.bookings.each do |booking| %>
-    <% booking.reviews.each do |review| %>
-    <div class="card col-5 px-3 pt-3 m-1 d-flex justify-content-start">
-      <h5><%="⭐️"*review.rating.to_i %>  👤 <%= @user.first_name %></h5>
-      <p> <%= review.content %> </p>
+  <div class="review-container row">
+    <h1 class="mx-3" id="reviewstick"> All reviews </h1>
+    <div class="d-flex">
+      <div class="p-3 col-5 flex-fill w-50">
+          <% @space.bookings.each do |booking| %>
+            <% booking.reviews.each do |review| %>
+            <div class="card p-3 mb-3">
+              <h5><%="⭐️"*review.rating.to_i %>  👤 <%= booking.user.first_name %></h5>
+              <p> <%= review.content %> </p>
+            </div>
+            <% end %>
+          <% end %>
+      </div>
+      <div class="p-3 col-5 flex-fill w-50" id="reviewform">
+        <% if @booking1 %>
+          <p>You've booked the space before, why don't you leave a review?</p>
+          <%= simple_form_for [@booking1, @review] do |f| %>
+            <%= f.input :rating, placeholder: "Rate from 0 to 5" %>
+            <%= f.input :content %>
+            <%= f.submit "Add a review", class: "btn btn-success" %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-    <% end %>
-  <% end %>
+  </div>
 
-</ul>
+</div>

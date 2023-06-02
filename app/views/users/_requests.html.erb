@@ -1,38 +1,40 @@
 <div class="card">
   <h2 class="m-3">Requests</h2>
   <% current_user.bookings_as_owner.each do |booking| %>
-    <div class="card-body row border">
-      <div class="col-3">
-        <h5 class="card-title"><%= booking.space.place_name %></h5>
-        <h6 class="card-subtitle mb-2 text-muted">Booking</h6>
-      </div>
-      <div class="col-3">
-        <p class="card-text">Date: <%= booking.date %></p>
-      </div>
-      <div class="col-3">
-        <p class="card-text">Amount of covers: <%= booking.covers %></p>
-      </div>
-      <div class="col-3" data-controller="confirmation">
-        <% if booking.confirmed == 1 %>
-          <p class="card-text">This is confirmed <i class="fa-solid fa-check"></i></p>
-        <% elsif booking.confirmed == 0 %>
-          <div data-confirmation-target="status">
-            <%= simple_form_for [booking], data: { insert_in_list_target: "confirmedForm", action: "submit->confirmation#confirmed" } do |f| %>
-              <div class="d-none confirm-btn">
-                <%= f.input :confirmed, input_html: { value: 1 } %>
+    <div class="card-body border">
+      <div class="row">
+        <div class="col-3">
+          <h5 class="card-title"><%= booking.space.place_name %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Booking</h6>
+        </div>
+        <div class="col-3">
+          <p class="card-text">Date: <%= booking.date %></p>
+        </div>
+        <div class="col-3">
+          <p class="card-text">Amount of covers: <%= booking.covers %></p>
+        </div>
+        <div class="col-3" data-controller="confirmation">
+          <% if booking.confirmed == 1 %>
+            <p class="card-text">This is confirmed <i class="fa-solid fa-check"></i></p>
+          <% elsif booking.confirmed == 0 %>
+            <div data-confirmation-target="status">
+              <%= simple_form_for [booking], data: { insert_in_list_target: "confirmedForm", action: "submit->confirmation#confirmed" } do |f| %>
+                <div class="d-none confirm-btn">
+                  <%= f.input :confirmed, input_html: { value: 1 } %>
+                </div>
+                <%= f.submit "Confirm Booking", class: "btn btn-primary mb-2"  %>
+              <% end %>
+              <%= simple_form_for [booking], data: { insert_in_list_target: "declineForm", action: "submit->confirmation#denied" } do |f| %>
+              <div class="d-none deny-btn">
+                <%= f.input :confirmed, input_html: { value: -1 }, class: "d-none" %>
               </div>
-              <%= f.submit "Confirm Booking", class: "btn btn-primary mb-2"  %>
-            <% end %>
-            <%= simple_form_for [booking], data: { insert_in_list_target: "declineForm", action: "submit->confirmation#denied" } do |f| %>
-            <div class="d-none deny-btn">
-              <%= f.input :confirmed, input_html: { value: -1 }, class: "d-none" %>
+                <%= f.submit "Deny Booking", class: "btn btn-secondary" %>
+              <% end %>
             </div>
-              <%= f.submit "Deny Booking", class: "btn btn-secondary" %>
-            <% end %>
-          </div>
-        <% else %>
-          <p class="card-text">Cancelled <i class="fa-solid fa-check"></i></p>
-        <% end %>
+          <% else %>
+            <p class="card-text">Cancelled <i class="fa-solid fa-check"></i></p>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>

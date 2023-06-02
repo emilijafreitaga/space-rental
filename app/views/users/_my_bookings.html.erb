@@ -16,14 +16,14 @@
             <% if booking.confirmed == 1 %>
               <h6 class="card-subtitle mb-2 text-muted">Booking confirmed</h6>
               <div>
-                <%= link_to 'Update', edit_space_booking_path(id: booking.id, space_id: booking.space.id), class: "card-link btn btn-success" %>
-                <%= link_to 'Cancel', booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "card-link btn btn-danger" %>
+                <%= link_to 'Update', edit_space_booking_path(id: booking.id, space_id: booking.space.id), class: "card-link btn btn-outline-secondary" %>
+                <%= link_to 'Cancel', booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "card-link btn btn-outline-danger" %>
               </div>
             <% elsif booking.confirmed == 0 %>
               <h6 class="card-subtitle mb-2 text-muted">Pending confirmation</h6>
               <div>
-                <%= link_to 'Update', edit_space_booking_path(id: booking.id, space_id: booking.space.id), class: "card-link btn btn-success" %>
-                <%= link_to 'Cancel', booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "card-link btn btn-danger" %>
+                <%= link_to 'Update', edit_space_booking_path(id: booking.id, space_id: booking.space.id), class: "card-link btn btn-outline-secondary" %>
+                <%= link_to 'Cancel', booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "card-link btn btn-outline-danger" %>
               </div>
             <% else %>
               <h6 class="card-subtitle mb-2 text-muted">Booking denied</h6>

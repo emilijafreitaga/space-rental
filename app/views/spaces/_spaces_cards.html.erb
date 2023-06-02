@@ -2,28 +2,32 @@
   <div class="cards">
     <% @spaces.each do |space| %>
       <div class="card-trip" style="width: 18rem;">
-        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <% space.photos.each_with_index do |photo, index| %>
-              <% if index == 0 %>
-                <div class="carousel-item active">
-              <% else %>
-                <div class="carousel-item">
+         <%= link_to space_path(space) do  %>
+          <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% space.photos.each_with_index do |photo, index| %>
+                <% if index == 0 %>
+                  <div class="carousel-item active">
+                <% else %>
+                  <div class="carousel-item">
+                <% end %>
+                  <%= cl_image_tag photo.key,  height: 300, width: 400, crop: :fill %>
+                  </div>
               <% end %>
-                <%= cl_image_tag photo.key,  height: 300, width: 400, crop: :fill %>
-                </div>
+            </div>
+          </div>
+          <div class="card-trip-infos">
+            <div>
+              <h2><%= link_to space.place_name, space_path(space), class: "text-decoration-none text-black"%></h2>
+              <p>Category: <%= space.category %> </p>
+              <p>Maximum capacity: <%= space.max_capacity %> persons</p>
+            </div>
+            <h2 class="card-trip-pricing">£<%= space.price_per_booking %></h2>
+            <% if space.reviews != [] %>
+            <h3 class="card-trip-user">⭐️ <%= space.reviews.map(&:rating).sum.to_f / space.reviews.count %> </h3>
             <% end %>
           </div>
-        </div>
-        <div class="card-trip-infos">
-          <div>
-            <h2><%= link_to space.place_name, space_path(space), class: "text-decoration-none text-black"%></h2>
-            <p>Category: <%= space.category %> </p>
-            <p>Maximum capacity: <%= space.max_capacity %> persons</p>
-          </div>
-          <h2 class="card-trip-pricing">£<%= space.price_per_booking %></h2>
-          <h2 class="card-trip-user">⭐️4.9 </h2>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>

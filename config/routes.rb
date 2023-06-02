@@ -9,11 +9,11 @@ Rails.application.routes.draw do
   get "/dashboard", to: "users#dashboard"
   get "/home", to: "pages#home"
   resources :spaces do
-    resources :bookings, only: [:show, :create, :edit, :update, :update_confirm] do
-      resources :reviews, only: [:new, :create]
-    end
+    resources :bookings, only: [:show, :create, :edit, :update, :update_confirm]
   end
-  resources :bookings, only: [:destroy]
+  resources :bookings, only: [:destroy] do
+    resources :reviews, only: [:create]
+  end
   resources :reviews, only: [:destroy]
 end
 # test

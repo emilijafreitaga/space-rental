@@ -14,26 +14,16 @@
           <p class="card-text">Amount of covers: <%= booking.covers %></p>
         </div>
         <div class="col-3" data-controller="confirmation">
-          <% if booking.confirmed == 1 %>
-            <p class="card-text">This is confirmed <i class="fa-solid fa-check"></i></p>
-          <% elsif booking.confirmed == 0 %>
-            <div data-confirmation-target="status">
-              <%= simple_form_for [booking], data: { insert_in_list_target: "confirmedForm", action: "submit->confirmation#confirmed" } do |f| %>
-                <div class="d-none confirm-btn">
-                  <%= f.input :confirmed, input_html: { value: 1 } %>
-                </div>
-                <%= f.submit "Confirm Booking", class: "btn btn-primary mb-2"  %>
-              <% end %>
-              <%= simple_form_for [booking], data: { insert_in_list_target: "declineForm", action: "submit->confirmation#denied" } do |f| %>
-              <div class="d-none deny-btn">
-                <%= f.input :confirmed, input_html: { value: -1 }, class: "d-none" %>
-              </div>
-                <%= f.submit "Deny Booking", class: "btn btn-secondary" %>
-              <% end %>
+          <% if booking.confirmed == 0 %>
+            <div class="col-3" data-controller="confirmation">
+              <button data-confirm="1" data-booking-id="<%= booking.id %>" data-confirmation-target="confirm" data-action="click->confirmation#confirm" class="btn btn-success">Confirm</button>
+              <button data-deny="-1" data-booking-id="<%= booking.id %>" data-confirmation-target="deny" data-action="click->confirmation#deny" class="btn btn-danger">Deny</button>
             </div>
-          <% else %>
-            <p class="card-text">Cancelled <i class="fa-solid fa-check"></i></p>
-          <% end %>
+            <% elsif booking.confirmed == 1 %>
+              <p class="card-text">This is confirmed <i class="fa-solid fa-check"></i></p>
+            <% else %>
+              <p class="card-text">Cancelled <i class="fa-solid fa-check"></i></p>
+            <% end %>
         </div>
       </div>
     </div>

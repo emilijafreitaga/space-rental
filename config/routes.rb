@@ -15,5 +15,8 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create]
   end
   resources :reviews, only: [:destroy]
+
+  patch "/bookings/:id/brequest", to: "bookings#brequest"
+
 end
 # test

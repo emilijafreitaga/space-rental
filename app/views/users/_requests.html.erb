@@ -15,9 +15,9 @@
         </div>
         <div class="col-3" data-controller="confirmation">
           <% if booking.confirmed == 0 %>
-            <div class="col-3" data-controller="confirmation">
-              <button data-confirm="1" data-booking-id="<%= booking.id %>" data-confirmation-target="confirm" data-action="click->confirmation#confirm" class="btn btn-success">Confirm</button>
-              <button data-deny="-1" data-booking-id="<%= booking.id %>" data-confirmation-target="deny" data-action="click->confirmation#deny" class="btn btn-danger">Deny</button>
+            <div class="col-3 d-flex" data-controller="confirmation">
+              <button data-confirm="1" data-booking-id="<%= booking.id %>" data-confirmation-target="confirm" data-action="click->confirmation#confirm" class="m-1 btn btn-success">Confirm</button>
+              <button data-deny="-1" data-booking-id="<%= booking.id %>" data-confirmation-target="deny" data-action="click->confirmation#deny" class="m-1 btn btn-danger">Deny</button>
             </div>
             <% elsif booking.confirmed == 1 %>
               <p class="card-text">This is confirmed <i class="fa-solid fa-check"></i></p>

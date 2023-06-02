@@ -1,24 +1,28 @@
 <div class="card">
   <h2 class="m-3">Requests</h2>
   <% current_user.bookings_as_owner.each do |booking| %>
-    <div class="card-body row border">
-      <div class="col-3">
-        <h5 class="card-title"><%= booking.space.place_name %></h5>
-        <h6 class="card-subtitle mb-2 text-muted">Booking</h6>
-      </div>
-      <div class="col-3">
-        <p class="card-text">Date: <%= booking.date %></p>
-      </div>
-      <div class="col-3">
-        <p class="card-text">Amount of covers: <%= booking.covers %></p>
-      </div>
-      <div class="col-3">
-        <% if booking.confirmed == true %>
-          <p class="card-text">Confirm your booking <i class="fa-solid fa-check"></i></p>
-        <% else %>
-          <p class="card-text">Confirm your booking <i class="fa-solid fa-xmark"></i></p>
-        <% end %>
-      </div>
-    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="card-body row">
+          <div class="col-3">
+            <h5 class="card-title"><%= booking.space.place_name %></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Booking</h6>
+          </div>
+          <div class="col-3">
+            <p class="card-text">Date: <%= booking.date %></p>
+          </div>
+          <div class="col-3">
+            <p class="card-text">Amount of covers: <%= booking.covers %></p>
+          </div>
+          <div class="col-3">
+            <% if booking.confirmed == true %>
+              <p class="card-text">Confirm your booking <i class="fa-solid fa-check"></i></p>
+            <% else %>
+              <p class="card-text">Confirm your booking <i class="fa-solid fa-xmark"></i></p>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    </ul>
   <% end %>
 </div>

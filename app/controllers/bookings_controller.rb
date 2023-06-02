@@ -35,6 +35,13 @@ class BookingsController < ApplicationController
     end
   end
 
+  def brequest
+    @booking = Booking.find(params[:id])
+    if @booking.update(request_params)
+      render json: { confirmed: @booking.confirmed }
+    end
+  end
+
   def destroy
     @booking = Booking.find(params[:id])
     @booking.destroy
@@ -43,5 +50,9 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:date, :covers, :confirmed)
+  end
+
+  def request_params
+    params.require(:booking).permit(:confirmed)
   end
 end

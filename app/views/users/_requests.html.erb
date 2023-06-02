@@ -1,29 +1,30 @@
 <div class="card">
   <h2 class="m-3">Requests</h2>
   <% current_user.bookings_as_owner.each do |booking| %>
-    <div class="card-body row border">
-      <div class="col-3">
-        <h5 class="card-title"><%= booking.space.place_name %></h5>
-        <h6 class="card-subtitle mb-2 text-muted">Booking</h6>
-      </div>
-      <div class="col-3">
-        <p class="card-text">Date: <%= booking.date %></p>
-      </div>
-      <div class="col-3">
-        <p class="card-text">Amount of covers: <%= booking.covers %></p>
-      </div>
-      <div class="col-3">
-        <% if booking.confirmed == 0 %>
-          <div data-controller="confirmation">
-            <button data-confirm="1" data-booking-id="<%= booking.id %>" data-confirmation-target="confirm" data-action="click->confirmation#confirm" class="btn btn-success">Confirm</button>
-            <button data-deny="-1" data-booking-id="<%= booking.id %>" data-confirmation-target="deny" data-action="click->confirmation#deny" class="btn btn-danger">Deny</button>
-          </div>
-        <% elsif booking.confirmed == 1 %>
-          <p class="card-text">This is confirmed <i class="fa-solid fa-check"></i></p>
-          </div>
-        <% else %>
-          <p class="card-text">Cancelled <i class="fa-solid fa-check"></i></p>
-        <% end %>
+    <div class="card-body border">
+      <div class="row">
+        <div class="col-3">
+          <h5 class="card-title"><%= booking.space.place_name %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Booking</h6>
+        </div>
+        <div class="col-3">
+          <p class="card-text">Date: <%= booking.date %></p>
+        </div>
+        <div class="col-3">
+          <p class="card-text">Amount of covers: <%= booking.covers %></p>
+        </div>
+        <div class="col-3" data-controller="confirmation">
+          <% if booking.confirmed == 0 %>
+            <div class="col-3" data-controller="confirmation">
+              <button data-confirm="1" data-booking-id="<%= booking.id %>" data-confirmation-target="confirm" data-action="click->confirmation#confirm" class="btn btn-success">Confirm</button>
+              <button data-deny="-1" data-booking-id="<%= booking.id %>" data-confirmation-target="deny" data-action="click->confirmation#deny" class="btn btn-danger">Deny</button>
+            </div>
+            <% elsif booking.confirmed == 1 %>
+              <p class="card-text">This is confirmed <i class="fa-solid fa-check"></i></p>
+            <% else %>
+              <p class="card-text">Cancelled <i class="fa-solid fa-check"></i></p>
+            <% end %>
+        </div>
       </div>
     </div>
   <% end %>

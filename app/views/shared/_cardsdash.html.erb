@@ -1,5 +1,4 @@
 
-
   <% @spaces.each do |space| %>
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -20,7 +19,14 @@
         <p>Category: <%= space.category %> </p>
         <p>Maximum capacity: <%= space.max_capacity %> persons</p>
       </div>
-      <h2 class="card-dash-pricing">£<%= space.price_per_booking %></h2>
-      <h2 class="card-dash-user">⭐️4.9 </h2>
+      <h2 class="card-trip-pricing">£<%= space.price_per_booking %></h2>
+      <% if space.reviews != [] %>
+        <h3 class="card-trip-user">⭐️ <%= space.reviews.map(&:rating).sum.to_f / space.reviews.count %> </h3>
+      <% end %>
     </div>
+              <div class="d-flex justify-content-between px-2">
+            <%= link_to 'Update space', edit_space_path(space), class: "btn btn-outline-success" %>
+            <%= link_to 'Delete space', space_path(space), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+          </div>
   <% end %>
+<div>

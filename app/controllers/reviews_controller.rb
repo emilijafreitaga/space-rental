@@ -12,18 +12,12 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.booking = @booking
     if @review.save
-      redirect_to space_path(@booking.space)
+      redirect_to space_path(@booking.space), notice: "Thank you for leaving a review ❤️ "
     else
       render 'spaces/show', status: :unprocessable_entity
     end
   end
 
-  def average_rating
-    @reviews = Review.all
-    @space = Space.find(params[:space_id])
-
-  end
-  
   private
 
   def review_params

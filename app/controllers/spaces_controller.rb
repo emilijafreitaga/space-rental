@@ -28,7 +28,7 @@ class SpacesController < ApplicationController
     @space = Space.new(space_params)
     @space.user = current_user
     @space.save
-    redirect_to spaces_path
+    redirect_to spaces_path, notice: "Your space has been created 🎉"
   end
 
   def edit
@@ -38,13 +38,13 @@ class SpacesController < ApplicationController
   def update
     @space = Space.find(params[:id])
     @space.update(space_params)
-    redirect_to space_path(@space)
+    redirect_to space_path(@space), notice: "Your space has been updated 🎉"
   end
 
   def destroy
     @space = Space.find(params[:id])
     @space.destroy
-    redirect_to spaces_path
+    redirect_to spaces_path, notice: "Your space has been deleted 💥"
   end
 
   private

@@ -14,7 +14,7 @@ class BookingsController < ApplicationController
     @booking.space = @space
     @booking.user = current_user
       if @booking.save
-        redirect_to dashboard_path
+        redirect_to dashboard_path, notice: "Your booking request has been sent 💌 "
       else
         render "spaces/show", status: :unprocessable_entity
       end
@@ -29,7 +29,7 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     # @space = Space.find(params[:space_id])
     if @booking.update(booking_params)
-      redirect_to dashboard_path
+      redirect_to dashboard_path, notice: "Your booking has been updated 🎉 "
     else
       render :edit, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_to dashboard_path, status: :see_other
+    redirect_to dashboard_path, status: :see_other, notice: "Your booking has been deleted 💥"
   end
 
   def booking_params

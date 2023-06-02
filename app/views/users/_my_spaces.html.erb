@@ -4,17 +4,42 @@
     <%= link_to 'Add a new space', new_space_path, class: "btn btn-primary m-3" %>
   </div>
 
-  <div class="container mt-7 .bg-transparent border-0">
+  <div class="container mt-7">
     <div class="cards">
-      <div class="card-dash mx-2 pb-3" style="width: 18rem;">
-        <% @spaces.each do |space| %>
-          <%= render "shared/cardsdash" %>
-          <div class="d-flex justify-content-between px-2">
-            <%= link_to 'Update space', edit_space_path(space), class: "btn btn-outline-success" %>
-            <%= link_to 'Delete space', space_path(space), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
-          </div>
-        <% end %>
-      </div>
+      <% @spaces.each do |space| %>
+        <div class="card-dash" style="width: 18rem;">
+          <%= link_to space_path(space) do  %>
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <% space.photos.each_with_index do |photo, index| %>
+                  <% if index == 0 %>
+                    <div class="carousel-item active">
+                  <% else %>
+                    <div class="carousel-item">
+                  <% end %>
+                    <%= cl_image_tag photo.key,  height: 300, width: 400, crop: :fill %>
+                    </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="card-dash-infos">
+              <div>
+                <h2><%= link_to space.place_name, space_path(space), class: "text-decoration-none text-black"%></h2>
+                <p><%= space.address %> </p>
+                <p>Maximum capacity: <%= space.max_capacity %> persons</p>
+              </div>
+              <h2 class="card-dash-pricing">£<%= space.price_per_booking %></h2>
+              <% if space.reviews != [] %>
+              <h3 class="card-dash-user">⭐️ <%= (space.reviews.map(&:rating).sum.to_f / space.reviews.count).round(1) %> </h3>
+              <% end %>
+            </div>
+            <div class="d-flex justify-content-between p-2">
+              <%= link_to 'Update space', edit_space_path(space), class: "btn btn-outline-success" %>
+              <%= link_to 'Delete space', space_path(space), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

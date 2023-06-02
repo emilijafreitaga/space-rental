@@ -1,0 +1,26 @@
+
+
+  <% @spaces.each do |space| %>
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <% space.photos.each_with_index do |photo, index| %>
+          <% if index == 0 %>
+            <div class="carousel-item active">
+          <% else %>
+            <div class="carousel-item">
+          <% end %>
+            <%= cl_image_tag photo.key,  height: 300, width: 400, crop: :fill %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="card-dash-infos">
+      <div>
+        <h2><%= link_to space.place_name, space_path(space), class: "text-decoration-none text-black"%></h2>
+        <p>Category: <%= space.category %> </p>
+        <p>Maximum capacity: <%= space.max_capacity %> persons</p>
+      </div>
+      <h2 class="card-dash-pricing">£<%= space.price_per_booking %></h2>
+      <h2 class="card-dash-user">⭐️4.9 </h2>
+    </div>
+  <% end %>

@@ -7,3 +7,10 @@
 .space-details {
   list-style: none;
 }
+
+#reviewstick {
+  position: sticky;
+  top: 85px;
+  background-color: #f4f4f4;
+  z-index: 500;
+}

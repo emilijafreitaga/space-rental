@@ -1,7 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :space
-  has_one :review
+  has_many :reviews
 
   validates :covers, numericality: { greater_than: 0 }
   validates :covers, :date, presence: true
@@ -16,3 +16,4 @@ class Booking < ApplicationRecord
   # end
 
 end
+4

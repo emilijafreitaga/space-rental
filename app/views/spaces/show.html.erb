@@ -63,3 +63,26 @@
     </div>
   </div>
 </div>
+
+You've booked the space before, why don't you leave a review?
+<% if @booking1 %>
+  <%= simple_form_for [@booking1, @review] do |f| %>
+    <%= f.input :rating, placeholder: "Rate from 0 to 5" %>
+    <%= f.input :content %>
+    <%= f.submit "Add a review", class: "btn btn-success" %>
+  <% end %>
+<% end %>
+<br>
+<h1> All reviews </h1>
+<br>
+
+  <% @space.bookings.each do |booking| %>
+    <% booking.reviews.each do |review| %>
+    <div class="card col-5 px-3 pt-3 m-1 d-flex justify-content-start">
+      <h5><%="⭐️"*review.rating.to_i %>  👤 <%= @user.first_name %></h5>
+      <p> <%= review.content %> </p>
+    </div>
+    <% end %>
+  <% end %>
+
+</ul>

@@ -1,40 +1,38 @@
-.card-trip {
+.btn {
+  border-radius: 20px;
+}
+
+.card-dash {
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 20px;
 }
 
-.card-trip:hover {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+.card-dash:hover {
+  box-shadow: 0 0 15px rgba(0,0,0,0.9);
 }
 
-.card-trip > img {
+.card-dash > img {
   height: 200px;
   width: 100%;
   object-fit: cover;
 }
 
-.card-trip h2 {
+.card-dash h2 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
 
-.card-trip h3 {
-  font-size: 13px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.card-trip p {
+.card-dash p {
   font-size: 12px;
   opacity: .7;
   margin: 0;
 }
 
 
-.card-trip .card-trip-infos {
+.card-dash .card-dash-infos {
   padding: 16px;
   display: flex;
   justify-content: space-between;
@@ -42,7 +40,7 @@
   position: relative;
 }
 
-.card-trip-infos .card-trip-user {
+.card-dash-infos .card-dash-user {
   position: absolute;
   right: 16px;
   top: 16px;
